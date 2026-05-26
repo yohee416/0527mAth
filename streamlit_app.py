@@ -108,7 +108,12 @@ st.markdown(
 st.title("📘 함수 학습지")
 st.write("함수는 실생활에서 입력과 출력이 연결되는 관계예요. 아래에서 직접 눌러봅시다!")
 
-st.header("1. 실생활 함수 예시")
+st.markdown(
+  """
+  <h2>1. 실생활에서의 함수 - <span style='font-size:14px; font-weight:600;'>입력값에 따라 출력값이 하나만 정의되는 관계</span></h2>
+  """,
+  unsafe_allow_html=True,
+)
 st.markdown(
     """
 <div class='card'>
@@ -138,43 +143,70 @@ st.markdown("**입력**: 사과 개수 → **출력**: 총 금액")
 st.header("2. 수학에서의 함수 정의")
 st.markdown(
     """
-- 함수란 두 집합 x, y에 대하여 x의 각 원소에 y의 원소가 하나씩만 대응할 때,
-  이 대응을 x에서 y로의 함수라 하고 기호로 f: x->y와 같이 나타낸다.
-- 정의역 X의 각 원소에 공역 Y의 원소가 오직 하나씩만 대응하는 관계
-
-<div class='small-box'>f: X → Y</div>
+- 함수란 두 집합 𝒳, 𝒴에 대하여 𝑥의 각 원소에 𝑦의 원소가 하나씩만 대응할 때,
+  이 대응을 𝒳에서 𝒴로의 함수라 하고 기호로 f: 𝒳 → 𝒴와 같이 나타낸다.
+- 정의역 𝒳의 각 원소에 공역 𝒴의 원소가 오직 하나씩만 대응하는 관계
 """,
     unsafe_allow_html=True,
 )
+
+# 함수 기호를 강조해서 표시
+st.markdown("<div class='small-box'>f: 𝒳 → 𝒴</div>", unsafe_allow_html=True)
 
 st.markdown("<div style='height:160px'></div>", unsafe_allow_html=True)
 
 st.header("3. 정의역, 공역, 치역")
-col1, col2, col3 = st.columns(3)
-col1.markdown(
+
+# 위쪽 중앙에 함수 기호를 배치하고, 아래에 정의역과 공역 카드를 좌우로 배치
+top_cols = st.columns([1, 1, 1])
+with top_cols[1]:
+    st.markdown(
+        "<div style='text-align:center; font-size:20px; font-weight:700;'>F: 𝒳 → 𝒴</div>",
+        unsafe_allow_html=True,
+    )
+
+st.write("")
+# 넓은 가운데 공백 열을 두어 정의역과 공역 사이 간격을 크게 확보
+cols = st.columns([1, 3, 1])
+with cols[0]:
+    st.markdown(
+        """
+        <div class='float-card'>
+          <div class='card-title'>정의역 𝒳</div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+with cols[2]:
+    st.markdown(
+        """
+        <div class='float-card'>
+          <div class='card-title'>공역 𝒴</div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+# 정의역/공역과 치역 사이의 설명문 (수식 포함)
+st.markdown(
+    "함수 $F$에서 정의역 $\\mathcal{X}$의 원소 $x$에 공역 $\\mathcal{Y}$의 원소 $y$가 대응할 때, "
+    "이것을 기호로 $y=f(x)$와 같이 나타내고, $f(x)$를 $x$에서의 함숫값이라 한다."
+)
+
+# 치역은 두 블록 사이 중앙에 배치
+st.markdown(
     """
-<div class='float-card'>
-  <div class='card-title'>정의역 X</div>
-</div>
-""",
+    <div style='display:flex; justify-content:center;'>
+      <div class='float-card' style='margin-top:12px;'>
+        <div class='card-title'>치역</div>
+      </div>
+    </div>
+    """,
     unsafe_allow_html=True,
 )
-col2.markdown(
-    """
-<div class='float-card'>
-  <div class='card-title'>공역 Y</div>
-</div>
-""",
-    unsafe_allow_html=True,
-)
-col3.markdown(
-    """
-<div class='float-card'>
-  <div class='card-title'>치역</div>
-</div>
-""",
-    unsafe_allow_html=True,
-)
+
+# 치값 전체의 집합 (블록 밖)
+st.latex(r"\{ f(x) \mid x \in \mathcal{X} \}")
 
 st.markdown("---")
 st.header("4. 함수 구분해보기")
@@ -183,8 +215,8 @@ x1 = [1, 2, 3, 4]
 y1 = [2, 4, 6, 8]
 fig1, ax1 = plt.subplots(figsize=(3, 3))
 ax1.plot(x1, y1, marker='o', color='#ff8f00')
-ax1.set_xlabel('x')
-ax1.set_ylabel('y')
+ax1.set_xlabel('𝑥')
+ax1.set_ylabel('𝑦')
 ax1.set_xticks([1, 2, 3, 4])
 ax1.set_yticks([2, 4, 6, 8])
 ax1.grid(True, linestyle='--', alpha=0.5)
@@ -193,8 +225,8 @@ x2 = [1, 1, 2, 3]
 y2 = [2, 4, 4, 6]
 fig2, ax2 = plt.subplots(figsize=(3, 3))
 ax2.scatter([1, 1, 2, 3], [2, 4, 4, 6], color='#d32f2f', s=60)
-ax2.set_xlabel('x')
-ax2.set_ylabel('y')
+ax2.set_xlabel('𝑥')
+ax2.set_ylabel('𝑦')
 ax2.set_xticks([1, 2, 3])
 ax2.set_yticks([2, 4, 6])
 ax2.grid(True, linestyle='--', alpha=0.5)
@@ -210,19 +242,19 @@ st.markdown(
 <div class='float-row'>
   <div class='float-card'>
     <div class='card-title'>일대일 함수</div>
-    <div class='small-box'>서로 다른 x는 서로 다른 y로 대응</div>
+    <div class='small-box'>𝑥₁ ∈ 𝒳, 𝑥₂ ∈ 𝒳일 때, 𝑥₁ ≠ 𝑥₂ ⇒ f(𝑥₁) ≠ f(𝑥₂)</div>
   </div>
   <div class='float-card'>
     <div class='card-title'>일대일 대응</div>
-    <div class='small-box'>각 x 원소가 정확히 하나의 y 원소에 대응</div>
+    <div class='small-box'>일대일함수<br>공역과 치역이 같은 함수</div>
   </div>
   <div class='float-card'>
     <div class='card-title'>항등함수</div>
-    <div class='small-box'>f(x)=x인 함수</div>
+    <div class='small-box'>정의역과 공역이 같고, 모든 원소가 자기 자신에게 대응하는 함수</div>
   </div>
   <div class='float-card'>
     <div class='card-title'>상수함수</div>
-    <div class='small-box'>모든 x에 대해 같은 값이 나오는 함수</div>
+    <div class='small-box'>정의역의 모든 원소가 공역의 단 하나의 원소에만 대응하는 함수</div>
   </div>
 </div>
 """,
@@ -240,7 +272,7 @@ st.markdown(
   </tr>
   <tr>
     <td>수학적 정의</td>
-    <td>x1 ≠ x2이면 f(x1) ≠ f(x2)이다.</td>
+    <td>𝑥₁ ≠ 𝑥₂이면 f(𝑥₁) ≠ f(𝑥₂)이다.</td>
     <td>일대일 함수이면서 치역이 공역과 같다.</td>
   </tr>
   <tr>
@@ -264,8 +296,8 @@ y_id = [0, 1, 2, 3, 4]
 fig_id, ax_id = plt.subplots(figsize=(3, 3))
 ax_id.plot(x_id, y_id, marker='o', color='#388e3c')
 ax_id.set_title('항등함수', fontweight='bold')
-ax_id.set_xlabel('x')
-ax_id.set_ylabel('y')
+ax_id.set_xlabel('𝑥')
+ax_id.set_ylabel('𝑦')
 ax_id.set_xticks([0, 1, 2, 3, 4])
 ax_id.set_yticks([0, 1, 2, 3, 4])
 ax_id.grid(True, linestyle='--', alpha=0.5)
@@ -275,8 +307,8 @@ y_const = [3, 3, 3, 3, 3]
 fig_const, ax_const = plt.subplots(figsize=(3, 3))
 ax_const.plot(x_const, y_const, marker='o', color='#1976d2')
 ax_const.set_title('상수함수', fontweight='bold')
-ax_const.set_xlabel('x')
-ax_const.set_ylabel('y')
+ax_const.set_xlabel('𝑥')
+ax_const.set_ylabel('𝑦')
 ax_const.set_xticks([0, 1, 2, 3, 4])
 ax_const.set_yticks([1, 2, 3, 4])
 ax_const.grid(True, linestyle='--', alpha=0.5)
@@ -314,19 +346,19 @@ mode_label = {
     'bijection': '일대일 대응',
 }[st.session_state.function_mode]
 st.markdown(f"**현재 모드:** {mode_label}")
-st.markdown("왼쪽의 정의역 X 버튼을 누르면, 오른쪽 공역 Y가 바로 색칠됩니다.")
+st.markdown("왼쪽의 정의역 𝒳 버튼을 누르면, 오른쪽 공역 𝒴가 바로 색칠됩니다.")
 
 col_left, col_right = st.columns(2)
 
 with col_left:
-    st.markdown("**정의역 X**")
+    st.markdown("**정의역 𝒳**")
     left_cols = st.columns(3)
     for i, c in enumerate(left_cols, start=1):
         if c.button(str(i), key=f"x_{i}"):
             st.session_state.selected_domain = str(i)
 
 with col_right:
-    st.markdown("**공역 Y**")
+    st.markdown("**공역 𝒴**")
     if st.session_state.function_mode == 'constant':
         labels = ['1', '2', '3']
     elif st.session_state.function_mode == 'identity':
